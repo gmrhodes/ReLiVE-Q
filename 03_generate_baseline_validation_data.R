@@ -1,13 +1,13 @@
-#This file generates baseline data for method validation. (~6 min)
+#This file generates baseline data for method validation.
 library(MASS)
-source("D:/Research/Project2/simulations/sim_functions.R")
+source("D:/Research/sim_functions.R")
 set.seed(6789)
 
 
 ################################################### USER-DEFINED INPUT ################################################### 
 start = Sys.time()
 #Define output folder where data will be written to
-output_path = "D:/Research/Project2/simulations/data/"
+output_path = "D:/Research/data/"
 
 #Define sample size
 m = 100000
@@ -45,5 +45,3 @@ saveRDS(covs, paste0(output_path,"valid_covs_base.RDS"))
 
 end = Sys.time()
 print(end-start)
-
-
