@@ -5,8 +5,7 @@ library(anytime)
 library(dplyr)
 library(foreach)
 library(doParallel)
-source("/home/gmrhodes/Project2/shared_code/functions.R")
-#source("D:/Research/Project2/shared_code/functions.R")
+source("D:/Research/functions.R")
 
 ########################################## USER-DEFINED INPUT ########################################## 
 #Survival model ("aft" or "cox")
@@ -39,17 +38,14 @@ num_iter = 500
 train_prop = 0.5
 
 #Path of directory containing simulation data
-data_path = "/home/gmrhodes/Project2/simulations/data/"
-#data_path = "D:/Research/Project2/simulations/data/"
+data_path = "D:/Research/data/"
 
 #If using context vector method, path of directory containing context vectors for simulation data
-contVec_path = paste0("/home/gmrhodes/Project2/simulations/context_vectors/", surv_mod, "/")
-#contVec_path = paste0("D:/Research/Project2/simulations/context_vectors/", surv_mod, "/")
+contVec_path = paste0("D:/Research/context_vectors/", surv_mod, "/")
 
 #If valid_funct is not null, path of directory containing validation data
 if(!is.null(valid_funct)) {
-  valid_path = "/home/gmrhodes/Project2/simulations/data/"
-  #valid_path = "D:/Research/Project2/simulations/data/"
+  valid_path = "D:/Research/data/"
 } else {
   valid_path = NULL
 }
@@ -57,14 +53,13 @@ if(!is.null(valid_funct)) {
 #If valid_funct is not null & using context vector method,
 #path of PYTHON PROGRAM to create context vectors for validation data
 if(!is.null(valid_funct)) {
-  contVec_path_valid = "/home/gmrhodes/Project2/simulations/04_create_validation_contextVecs.py"
-  #contVec_path_valid = "D:/Research/Project2/simulations/04_create_validation_contextVecs.py"
+  contVec_path_valid = "D:/Research/04_create_validation_contextVecs.py"
 } else {
   contVec_path_valid = NULL
 }
 
 #Path of directory to write results
-result_path = paste0("/home/gmrhodes/Project2/simulations/results/", surv_mod, "/", mainEff, "/") 
+result_path = paste0("D:/Research/results/", surv_mod, "/", mainEff, "/") 
 
 
 ########################################## MAIN ########################################## 
@@ -128,4 +123,3 @@ write.table(regime_value_est, paste0(result_path, regime_text, "_regime_value.cs
 end_time = Sys.time()
 run_time = end_time - start_time
 print(run_time)
-
