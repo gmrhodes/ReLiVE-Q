@@ -165,8 +165,7 @@ compute_valid_value = function(valid_covs, trtMat, surv_mod, tVec) {
 #Returns scalar validation value estimate
 optRegime_validate = function(qModel_trt0, qModel_trt1, valid_df, valid_covs, contVec_path_valid, 
                                      mainEff_funct_valid, tVec, base_covs, long_covs, surv_mod, contVec_path, df) {
-  source("/home/gmrhodes/Project2/simulations/sim_functions.R")
-  #source("D:/Research/Project2/simulations/sim_functions.R")
+  source("D:/Research/sim_functions.R")
   
   #If using context vector method
   if(identical(mainEff_funct_valid, "contVec_mainEff_valid")) {
@@ -382,8 +381,7 @@ iterative_fn = function(i, train_prop, mainEff, regime, contVec_path, df, flatDF
   library(abind)
   library(reticulate)
   library(zoo)
-  source("/home/gmrhodes/Project2/shared_code/functions.R")
-  #source("D:/Research/Project2/shared_code/functions.R")
+  source("D:/Research/functions.R")
   set.seed(1233+i)
   
   #Define main effect function
