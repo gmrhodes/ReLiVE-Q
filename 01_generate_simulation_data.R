@@ -1,4 +1,4 @@
-#This file generates the data set for the simulations. (~30 seconds)
+#This file generates the data set for the simulations. 
 library(MASS)
 library(zoo)
 set.seed(5678)
