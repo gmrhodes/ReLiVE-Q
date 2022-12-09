@@ -2,13 +2,13 @@
 library(MASS)
 library(zoo)
 set.seed(5678)
-source("D:/Research/Project2/simulations/sim_functions.R")
+source("D:/Research/sim_functions.R")
 
 
 ################################################### MAIN ################################################### 
 start = Sys.time()
 #Define output folder where data will be written to
-output_path = "D:/Research/Project2/simulations/data/"
+output_path = "D:/Research/data/"
 
 #Define total sample size (training + testing)
 m = 10000
@@ -64,34 +64,3 @@ write.table(coxDF, paste0(output_path, "cox_df.csv"), sep=",", row.names=F)
 
 end = Sys.time()
 print(end-start)
-
-
-
-################################################### Summaries of Survival Times ################################################### 
-#Count number of NA survival times 
-length(which(aft_time$surv_time==9999))
-length(which(cox_time$surv_time==9999))
-
-#Compute censoring proportions
-sum(aft_time$delta_L==0) / nrow(aft_time)
-sum(cox_time$delta_L==0) / nrow(cox_time)
-
-#Compute number of patients at-risk at each decision point
-aft_risk = rep(NA, length(measTime))
-cox_risk = rep(NA, length(measTime))
-for(j in 1:length(measTime)) {
-  aft_risk[j] = length(which(aft_time$U_L>measTime[j]))
-  cox_risk[j] = length(which(cox_time$U_L>measTime[j]))
-}
-aft_risk
-cox_risk
-
-#Create histograms of U_L
-png("D:/Research/Project2/plots/aftHist.png")
-par(cex.axis=1.25, cex.main=1.5)
-hist(aft_time$U_L, main="AFT: min(T,C,L)", xlab="", breaks=50)
-dev.off()
-png("D:/Research/Project2/plots/coxHist.png")
-par(cex.axis=1.25, cex.main=1.5)
-hist(cox_time$U_L, main="Cox: min(T,C,L)", xlab="", breaks=50)
-dev.off()
