@@ -33,11 +33,7 @@ lvcf_mainEff = function(df, tVec, dp, base_covs, long_covs) {
 contextVec_mainEff = function(contVec_path, tVec, dp, base_covs, long_covs) {
   contVecDF = read.table(paste0(contVec_path, "contextVec_t", tVec[dp], ".csv"), sep=",", header=T) 
   pattern = paste(long_covs, collapse="|")
-  long_covs_names = names(contVecDF)[grepl(pattern, names(contVecDF))]
-  
-  #For data application, rename icustayid to id
-  if("icustayid" %in% names(contVecDF)) { names(contVecDF)[which(names(contVecDF)=="icustayid")] = "id" }
-  
+  long_covs_names = names(contVecDF)[grepl(pattern, names(contVecDF))]  
   contVecDF = contVecDF[,c("id",base_covs,long_covs_names)]
   return(contVecDF)
 }
