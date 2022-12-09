@@ -92,27 +92,3 @@ def create_valid_contVecs(df, t, model_path, minVec, maxVec):
         
     #Return dataframe
     return(regressMatrix)
-    
-
-
-    
-  
-    
-    
-        
-        
-    
-    
-
-
-
-   
-
-
-
-
-
-
-
-
-
