@@ -6,8 +6,7 @@ library(foreach)
 library(doParallel)
 library(abind)
 library(zoo)
-#source("D:/Research/Project2/simulations/sim_functions.R")
-source("/home/gmrhodes/Project2/simulations/sim_functions.R")
+source("D:/Research/sim_functions.R")
 
 ########################################## USER-DEFINED INPUT ########################################## 
 #Number of available cores
@@ -17,11 +16,10 @@ num_cores = 65
 num_iter = 500
 
 #Path of directory containing validation data 
-valid_path = "/home/gmrhodes/Project2/simulations/data/"
-#valid_path = "D:/Research/Project2/simulations/data/"
+valid_path = "D:/Research/data/"
 
 #Path of directory to write results
-result_path = "/home/gmrhodes/Project2/simulations/results/"
+result_path = "D:/Research/results/"
 
 
 ########################################## MAIN ########################################## 
@@ -104,7 +102,3 @@ write.table(noTrt_valMat, paste0(result_path,"noTrt_valid_value.csv"), sep=",", 
 end_time = Sys.time()
 run_time = end_time - start_time
 print(run_time)
-
-
-
-
