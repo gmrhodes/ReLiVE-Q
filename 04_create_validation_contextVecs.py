@@ -40,7 +40,7 @@ def covArray_construct(covDF):
     
 
 #################################################### FUNCTION TO CONSTRUCT WINDOW-SPECIFIC CONTEXT VECTORS #################################################### 
-#Function to construct window-specific context vectors for longitudinal covariate 'cov' at decision point time 't' from fitted LSTM autoencoder
+#Function to construct window-specific context vectors for longitudinal covariate 'cov' at decision point time 't' from trained LSTM autoencoder
 def context_vector_construct_load(longCov, longName, cov, t, model_path):   
     #Construct context vector using fitted LSTM autoencoder 
     longCov_lstm = longCov[:,:,np.newaxis]
