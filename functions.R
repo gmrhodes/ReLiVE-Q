@@ -1,3 +1,5 @@
+#This file contains functions to implement the RL Q-learning method.
+
 #Function to construct dataframe of main effects for baseline method
 #Resulting dataframe includes id, base_covs, long_covs
 baseline_mainEff = function(df, tVec, dp, base_covs, long_covs) {
