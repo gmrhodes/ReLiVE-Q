@@ -14,7 +14,7 @@ m = 100000
 
 
 ################################################### MAIN ###################################################
-#Longitudinal biomarker parameters
+#Longitudinal covariate parameters
 aVec = c(-2,3,5)
 cMat = matrix(NA, nrow=10, ncol=3)
 cMat[,1] = c(4,-7,5,-2.5,3.5,-5,1.5,2,-2,1)
