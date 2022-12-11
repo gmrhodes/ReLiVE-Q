@@ -1,4 +1,4 @@
-# This file contains functions to create the window-specific context vectors for the vaidation data.
+# This file contains functions to create the window-specific context vectors for the validation data.
 #################################################### SET-UP ####################################################
 import os
 os.environ['PYTHONHASHSEED']='0'
