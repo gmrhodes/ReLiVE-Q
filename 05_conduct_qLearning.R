@@ -1,5 +1,5 @@
 # This file conducts Q-learning to estimate the value of a user-specified treatment regime 
-# for patients in the simulated data set using a user-specified longitudinal summary. 
+# for patients in the simulated data set using a user-specified longitudinal summary vector. 
 start_time = Sys.time()
 library(anytime)
 library(dplyr)
