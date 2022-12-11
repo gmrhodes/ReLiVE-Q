@@ -125,7 +125,7 @@ compute_valid_value = function(valid_covs, trtMat, surv_mod, tVec) {
   aftBetas = c(0.25,-0.25,0.25,0.5,-1.5,-0.25,0.25,0.25,0.25)
   coxBetas = c(0.25,-0.5,0.25,0.5,-1.5,-0.5,-0.5,0.25,-0.25)
   lambda = 0.1
-  ##Longitudinal biomarker parameters
+  ##Longitudinal covariate parameters
   aVec = c(-2,3,5)
   cMat = matrix(NA, nrow=10, ncol=3)
   cMat[,1] = c(4,-7,5,-2.5,3.5,-5,1.5,2,-2,1)
