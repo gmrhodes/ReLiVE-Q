@@ -1,4 +1,4 @@
-# This file creates window-specific context vectors for the simulation data & saves the fitted LSTM autoencoders. 
+# This file creates window-specific context vectors for the simulation data & saves the trained LSTM autoencoders. 
 import time 
 startTime = time.time()
 
