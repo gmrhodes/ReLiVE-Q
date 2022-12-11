@@ -1,4 +1,4 @@
-# rl-qlearning
+# rl-qlearn
 Supplementary material for "A residual life value function for dynamic treatment regime optimization via Q-learning"
 
 This repository contains the R and Python code used to conduct the simulation study in "A residual life value function for dynamic treatment regime optimization via Q-learning" by Rhodes, Davidian, and Lu.
