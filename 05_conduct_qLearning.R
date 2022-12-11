@@ -11,7 +11,7 @@ source("D:/Research/functions.R")
 #Survival model ("aft" or "cox")
 surv_mod = "aft"
 
-#Method to construct dataframe of main effects
+#Method to construct main effects
 ## baseline, average, lvcf, context_vectors
 mainEff = "baseline"
 
