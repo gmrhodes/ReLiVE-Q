@@ -41,7 +41,7 @@ for(dp in 1:(length(tVec)-1)) {
   #Create observed treatment decisions at decision point dp
   obsTrtMat[,dp] = rbinom(length(valid_covs$base_cov), 1, 0.5) 
   
-  #Generate longitudinal biomarker measurements collected between decision point dp and dp+1
+  #Generate longitudinal measurements collected between decision point dp and dp+1
   ##Observed treatment regime
   valid_upd_obs = intermed_meas(dp, valid_covs_obs, obsTrtMat)
   valid_covs_obs = valid_upd_obs[[2]]
@@ -49,7 +49,7 @@ for(dp in 1:(length(tVec)-1)) {
   valid_upd_no = intermed_meas(dp, valid_covs_no, noTrtMat)
   valid_covs_no = valid_upd_no[[2]]
 }
-#Create "observed" (random) treatment decisions at last decision point
+#Create observed treatment decisions at last decision point
 obsTrtMat[,length(tVec)] = rbinom(length(valid_covs$base_cov), 1, 0.5) 
 
 #Function to compute validation value estimate for observed & no treatment regimes using seed 1233+i
