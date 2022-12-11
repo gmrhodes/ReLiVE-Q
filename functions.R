@@ -145,8 +145,10 @@ compute_valid_value = function(valid_covs, trtMat, surv_mod, tVec) {
   
   #Generate survival times corresponding to treatments in trtMat
   if(surv_mod=="cox") {
+    ##Cox
     timeDF = gen_cox(length(valid_covs$base_cov), aVec, cMat, dMat, coxBetas, lambda, valid_covs$b.randeffs, valid_covs$f.randeffs, valid_covs$base_cov, trt10)
   } else {
+    ##AFT
     timeDF = gen_aft(length(valid_covs$base_cov), aVec, cMat, dMat, aftBetas, valid_covs$b.randeffs, valid_covs$f.randeffs, valid_covs$base_cov, trt10)
   }
   timeDF = as.data.frame(timeDF)
@@ -158,7 +160,7 @@ compute_valid_value = function(valid_covs, trtMat, surv_mod, tVec) {
     val = val + as.integer(timeDF$min_Td_L>tVec[dp])*(timeDF$min_Td_L-tVec[dp])
   }
   
-  #Compute & return validation value for regime
+  #Compute & return validation value estimate for regime
   return( mean(val) )
 }
 
@@ -187,7 +189,7 @@ optRegime_validate = function(qModel_trt0, qModel_trt1, valid_df, valid_covs, co
   trtMat = matrix(NA, nrow=length(unique(valid_df$id)), ncol=length(tVec))
   colnames(trtMat) = paste0("trt_",c(1:length(tVec)))
   
-  #Compute estimated optimal treatment for each decision point
+  #Compute estimated optimal treatment at each decision point
   for(dp in 1:length(tVec)) {
     #Create design matrix
     if(dp==1) {
@@ -212,14 +214,14 @@ optRegime_validate = function(qModel_trt0, qModel_trt1, valid_df, valid_covs, co
     
     #If not the last decision point
     if(dp<length(tVec)) {
-      #Generate longitudinal biomarker measurements collected between decision point dp and dp+1
+      #Generate longitudinal covariate measurements collected between decision point dp and dp+1
       valid_upd = intermed_meas(dp, valid_covs, trtMat)
       valid_df = valid_upd[[1]]
       valid_covs = valid_upd[[2]]
       
       #If using context vector method
       if(identical(mainEff_funct_valid, "contVec_mainEff_valid")) {
-        #Construct context vectors for decision point dp+1 using fitted LSTM autoencoder
+        #Construct context vectors for decision point dp+1 using trained LSTM autoencoder
         contVecDF = create_valid_contVecs(valid_df, tVec[dp+1], contVec_path, minVec, maxVec)
         
         #Format context vector dataframe
@@ -230,7 +232,7 @@ optRegime_validate = function(qModel_trt0, qModel_trt1, valid_df, valid_covs, co
     }
   }
   
-  #Compute validation value for estimated optimal treatment regime
+  #Compute validation value estimate for estimated optimal treatment regime
   value_valid = compute_valid_value(valid_covs, trtMat, surv_mod, tVec) 
   return(value_valid)
 }
