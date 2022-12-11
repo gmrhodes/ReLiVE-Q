@@ -1,6 +1,6 @@
 #This file contains functions used to generate the data for the simulation studies. 
 
-#Function to compute longitudinal biomarker 
+#Function to compute longitudinal covariate 
 #Measurement time: t
 #Fixed intercept of piecewise constant function: a
 #Vector of 10 fixed slopes of piecewise constant function: cVec
@@ -22,7 +22,7 @@ Bt = function(t, a, cVec, b.randeff, dVec, f.randeff, trt) {
 }
 
 
-#Function to generate baseline covariates & longitudinal biomarkers 
+#Function to generate baseline covariates & longitudinal covariates 
 #Sequence of measurement times: measTime 
 #Sample size: m
 #Vector of fixed intercepts for 3 piecewise constant functions: aVec
@@ -34,7 +34,7 @@ gen_covs = function(measTime, m, aVec, cMat, dMat, D1, D2) {
   #Generate baseline covariates 
   xVec = runif(m, 0, 1) 
   
-  #Generate random effects for each biomarker 
+  #Generate random effects for each covariate 
   b_i = vector(mode="list", length=3)
   mu1 = rep(0,11)
   for(l in 1:3) {
@@ -49,10 +49,10 @@ gen_covs = function(measTime, m, aVec, cMat, dMat, D1, D2) {
   #Matrix to store treatments 
   trtMat = matrix(NA, nrow=m, ncol=4)
   colnames(trtMat) = paste0("trt_",c(1:4))
-  #Matrix to store longitudinal biomarkers WITH measurement errors
+  #Matrix to store longitudinal covariates WITH measurement errors
   obsMat = array(NA, dim=c(3,m,length(measTime)))
   dimnames(obsMat)[[3]] = paste0("obs_",c(1:length(measTime)))
-  #Matrix to store longitudinal biomarkers WITHOUT measurement errors
+  #Matrix to store longitudinal covariates WITHOUT measurement errors
   BtMat = array(NA, dim=c(3,m,length(measTime)))
   dimnames(BtMat)[[3]] = paste0("val_",c(1:length(measTime)))
   
@@ -64,7 +64,7 @@ gen_covs = function(measTime, m, aVec, cMat, dMat, D1, D2) {
   
   #At each measurement time
   for(j in 1:length(measTime)) {
-    #Generate 3 longitudinal biomarkers
+    #Generate 3 longitudinal covariates
     for(l in 1:3) {
       BtMat[l,,j] = Bt(measTime[j], aVec[l], cMat[,l], b_i[[l]], dMat[,l], f_i[[l]], trtMat)
       obsMat[l,,j] = BtMat[l,,j] + rnorm(m, 0, 0.5)
@@ -132,8 +132,8 @@ nu_K_t = function(K, t, aVec, cMat, dMat, betaVec, lambda=1, b_i, f_i, xVec, trt
 #Matrix of 10 fixed slopes for 3 piecewise constant functions: cMat
 #Matrix of 10 fixed, treatment-dependent slopes for 3 piecewise constant functions: dMat
 #Survival time model parameters: betaVec, lambda (lambda=1 for AFT)
-#List for 3 biomarkers of 11 random effects for m patients: b_i
-#List for 3 biomarkers of 10 treatment-dependent random effects for m patients: f_i
+#List for 3 covariates of 11 random effects for m patients: b_i
+#List for 3 covariates of 10 treatment-dependent random effects for m patients: f_i
 #Vector of m baseline covariates: xVec
 #Matrix of m treatments at 10 measurement times: trtMat
 nu_t = function(t, aVec, cMat, dMat, betaVec, lambda=1, b_i, f_i, xVec, trtMat) {
