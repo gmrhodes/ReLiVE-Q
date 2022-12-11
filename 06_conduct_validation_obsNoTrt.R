@@ -29,14 +29,14 @@ valid_covs = readRDS(paste0(valid_path, "valid_covs_base.RDS"))
 #Create vector of decision point times
 tVec = seq(0,9,by=3)
 
-#Create matrices to store observed and no treatment decisions
+#Create matrices to store observed and no treatment regime decisions
 noTrtMat = matrix(0, nrow=length(valid_covs$base_cov), ncol=length(tVec))
 colnames(noTrtMat) = paste0("trt_",c(1:4))
 obsTrtMat = matrix(NA, nrow=length(valid_covs$base_cov), ncol=length(tVec))
 colnames(obsTrtMat) = paste0("trt_",c(1:4))
 valid_covs_no = valid_covs_obs = valid_covs
 
-#Construct biomarker measurements for observed and no treatment regime
+#Construct longitudinal measurements for observed and no treatment regime
 for(dp in 1:(length(tVec)-1)) {
   #Create observed treatment decisions at decision point dp
   obsTrtMat[,dp] = rbinom(length(valid_covs$base_cov), 1, 0.5) 
@@ -54,14 +54,12 @@ obsTrtMat[,length(tVec)] = rbinom(length(valid_covs$base_cov), 1, 0.5)
 
 #Function to compute validation value estimate for observed & no treatment regimes using seed 1233+i
 iterative_fn = function(i, tVec, valid_covs_obs, valid_covs_no, obsTrtMat, noTrtMat) {
-  source("/home/gmrhodes/Project2/simulations/sim_functions.R")
-  source("/home/gmrhodes/Project2/shared_code/functions.R")
-  #source("D:/Research/Project2/simulations/sim_functions.R")
-  #source("D:/Research/Project2/shared_code/functions.R")
+  source("D:/Research/sim_functions.R")
+  source("D:/Research/functions.R")
   set.seed(1233+i)
   
   #Compute values for AFT & Cox populations
-  ##Observed regime
+  ##Observed treatment regime
   obs_vals = rep(NA, 2)
   obs_vals[1] = compute_valid_value(valid_covs_obs, obsTrtMat, "aft", tVec)
   obs_vals[2] = compute_valid_value(valid_covs_obs, obsTrtMat, "cox", tVec)
@@ -75,13 +73,13 @@ iterative_fn = function(i, tVec, valid_covs_obs, valid_covs_no, obsTrtMat, noTrt
   return(list(obs_vals, no_trt_vals))
 }
 
-#Compute validation value estimate for observed regime & no treatment regime 'num_iter' times
+#Compute validation value estimate for observed treatment regime & no treatment regime 'num_iter' times
 myCluster = makeCluster(num_cores, type="PSOCK", outfile="") 
 registerDoParallel(myCluster)
 results = foreach(i=1:num_iter) %dopar% {iterative_fn(i, tVec, valid_covs_obs, valid_covs_no, obsTrtMat, noTrtMat)}
 stopCluster(myCluster)
 
-#Create matrix to store validation value estimates of observed regime 
+#Create matrix to store validation value estimates of observed treatment regime 
 obs_valMat = matrix(NA, nrow=num_iter, ncol=2)
 colnames(obs_valMat) = c("aft","cox")
 
