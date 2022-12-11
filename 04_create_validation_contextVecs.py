@@ -42,7 +42,7 @@ def covArray_construct(covDF):
 #################################################### FUNCTION TO CONSTRUCT WINDOW-SPECIFIC CONTEXT VECTORS #################################################### 
 #Function to construct window-specific context vectors for longitudinal covariate 'cov' at decision point time 't' from trained LSTM autoencoder
 def context_vector_construct_load(longCov, longName, cov, t, model_path):   
-    #Construct context vector using fitted LSTM autoencoder 
+    #Construct context vector using trained LSTM autoencoder 
     longCov_lstm = longCov[:,:,np.newaxis]
     contextVec_model = tf.keras.models.load_model('{}/model_t{}_cov{}'.format(model_path, int(t), cov))
     cv = contextVec_model.predict(longCov_lstm)[:,0,:]  
