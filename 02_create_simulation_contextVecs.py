@@ -133,7 +133,7 @@ def context_vector_construct(longCov, longName, cov, t):
     lstm_best = tuner.get_best_models(num_models=1)[0]
     lstm_best.fit(longCov_lstm, longCov_lstm, epochs=epochs, verbose=0)
 
-    #Extract context vector from LSTM autoencoder & save fitted model
+    #Extract context vector from LSTM autoencoder & save trained model
     contextVec_model = tf.keras.Model(inputs=lstm_best.inputs, outputs=lstm_best.layers[2].output)
     contextVec_model.save('{}{}/model_t{}_cov{}'.format(output_path, surv_model, t, cov))
     cv = contextVec_model.predict(longCov_lstm)[:,0,:]  
