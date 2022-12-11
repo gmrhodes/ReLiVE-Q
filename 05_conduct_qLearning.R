@@ -1,5 +1,5 @@
-# This file conducts Q-learning to estimate the value of a user-specified 
-# treatment regime for patients in the simulated data set using a user-specified design matrix. 
+# This file conducts Q-learning to estimate the value of a user-specified treatment regime 
+# for patients in the simulated data set using a user-specified longitudinal summary. 
 start_time = Sys.time()
 library(anytime)
 library(dplyr)
@@ -11,24 +11,24 @@ source("D:/Research/functions.R")
 #Survival model ("aft" or "cox")
 surv_mod = "aft"
 
-#Method to construct main effects
+#Method to construct longitudinal summary 
 ## baseline, average, lvcf, context_vectors
 mainEff = "baseline"
 
-#Regime for which to estimate value
+#Regime for which to estimate the value
 ## 1=optimal, 2=observed, 3=no treatment
 regime = 1
 
-#Function for value estimate validation procedure
+#Function for validation procedure
 if(regime==1) {
-  ## optRegime_validate (or NULL for no procedure)
+  ## optRegime_validate, or NULL for no validation procedure
   valid_funct = optRegime_validate
 } else {
-  ## Do NOT validate observed/no treatment regime in this program 
+  ## ALWAYS NULL - NEVER validate observed/no treatment regime in this program 
   valid_funct = NULL
 }
 
-#Number of available cores
+#Number of cores to parallelize across
 num_cores = 20
 
 #Number of iterations
@@ -50,7 +50,7 @@ if(!is.null(valid_funct)) {
   valid_path = NULL
 }
 
-#If valid_funct is not null & using context vector method,
+#If valid_funct is not null & using the context vector method,
 #path of PYTHON PROGRAM to create context vectors for validation data
 if(!is.null(valid_funct)) {
   contVec_path_valid = "D:/Research/04_create_validation_contextVecs.py"
