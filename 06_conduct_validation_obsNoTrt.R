@@ -29,16 +29,16 @@ valid_covs = readRDS(paste0(valid_path, "valid_covs_base.RDS"))
 #Create vector of decision point times
 tVec = seq(0,9,by=3)
 
-#Create matrices to store "observed" and no treatment decisions
+#Create matrices to store observed and no treatment decisions
 noTrtMat = matrix(0, nrow=length(valid_covs$base_cov), ncol=length(tVec))
 colnames(noTrtMat) = paste0("trt_",c(1:4))
 obsTrtMat = matrix(NA, nrow=length(valid_covs$base_cov), ncol=length(tVec))
 colnames(obsTrtMat) = paste0("trt_",c(1:4))
 valid_covs_no = valid_covs_obs = valid_covs
 
-#Construct biomarker measurements for "observed" (random) and no treatment regime
+#Construct biomarker measurements for observed and no treatment regime
 for(dp in 1:(length(tVec)-1)) {
-  #Create "observed" (random) treatment decisions at decision point dp
+  #Create observed treatment decisions at decision point dp
   obsTrtMat[,dp] = rbinom(length(valid_covs$base_cov), 1, 0.5) 
   
   #Generate longitudinal biomarker measurements collected between decision point dp and dp+1
