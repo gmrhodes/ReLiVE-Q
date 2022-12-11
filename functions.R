@@ -371,7 +371,7 @@ randomForest_qModels = function(designDF, trainDF, testDF, base_covs, long_covs_
 }
 
 
-#Function to conduct Q-learning on a single train/test split using seed 1233+i
+#Function to conduct RL Q-learning on a single train/test split using seed 1233+i
 #Returns dataframes of training & testing pseudo-outcomes and treatment decisions
 #Returns scalar training, testing, and validation value estimates
 iterative_fn = function(i, train_prop, mainEff, regime, contVec_path, df, flatDF, tVec, base_covs, long_covs, 
@@ -388,7 +388,7 @@ iterative_fn = function(i, train_prop, mainEff, regime, contVec_path, df, flatDF
   source("D:/Research/functions.R")
   set.seed(1233+i)
   
-  #Define main effect function
+  #Define longitudinal summary function
   mainEff_funct = ifelse(mainEff=="baseline", baseline_mainEff, 
                          ifelse(mainEff=="average", average_mainEff, 
                                 ifelse(mainEff=="lvcf", lvcf_mainEff, 
@@ -406,7 +406,7 @@ iterative_fn = function(i, train_prop, mainEff, regime, contVec_path, df, flatDF
   valueDF_train = data.frame(id=trainIDs)
   valueDF_test = data.frame(id=testIDs)
   
-  #Create list to store random forest Q-models for Trt 0 & Trt 1
+  #Create list to store random forest training Q-models for Trt 0 & Trt 1
   qModel_trt0 = vector(mode="list", length=length(tVec))
   qModel_trt1 = vector(mode="list", length=length(tVec))
   
