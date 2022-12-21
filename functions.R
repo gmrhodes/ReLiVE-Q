@@ -1,4 +1,4 @@
-#This file contains functions to implement the RL Q-learning method.
+#This file contains functions to implement ReLiVE-Q.
 
 #Function to construct dataframe of main effects for baseline method
 #Resulting dataframe includes id, base_covs, long_covs
