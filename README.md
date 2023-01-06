@@ -13,5 +13,5 @@ The program files should be executed in numerical order according to their file 
 4) 04_create_validation_contextVecs.py - Contains functions to create the context vectors for the validation data.
 5) 05_conduct_qLearning.R - Conducts Q-learning to estimate the testing value and validation value of a user-specified treatment regime. 
 6) 06_conduct_validation_obsNoTrt.R - Computes the validation value estimate for the observed treatment regime and the no treatment regime.
-7) functions.R - Contains functions used to conduct ReLiVE-Q. 
+7) functions.R - Contains functions used to conduct ReLiVE and ReLiVE-Q. 
 8) sim_functions.R - Contains functions used to generate the data for the simulation study. 
