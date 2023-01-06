@@ -371,7 +371,7 @@ randomForest_qModels = function(designDF, trainDF, testDF, base_covs, long_covs_
 }
 
 
-#Function to conduct RL Q-learning on a single train/test split using seed 1233+i
+#Function to conduct testing procedure (and optional validation procedure) on a single train/test split using seed 1233+i
 #Returns dataframes of training & testing pseudo-outcomes and treatment decisions
 #Returns scalar training, testing, and validation value estimates
 iterative_fn = function(i, train_prop, mainEff, regime, contVec_path, df, flatDF, tVec, base_covs, long_covs, 
@@ -402,7 +402,7 @@ iterative_fn = function(i, train_prop, mainEff, regime, contVec_path, df, flatDF
   trtDF_train = data.frame(id=trainIDs)
   trtDF_test = data.frame(id=testIDs)
   
-  #Create dataframes to store value estimates
+  #Create dataframes to store patient-specific value estimates
   valueDF_train = data.frame(id=trainIDs)
   valueDF_test = data.frame(id=testIDs)
   
