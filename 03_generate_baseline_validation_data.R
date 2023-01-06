@@ -1,4 +1,4 @@
-#This file generates baseline data for method validation.
+#This file generates baseline data for the validation procedure.
 library(MASS)
 source("D:/Research/sim_functions.R")
 set.seed(6789)
