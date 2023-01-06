@@ -1,5 +1,5 @@
 # ReLiVE-Q
-Supplementary material for "Optimizing treatment regimes with electronic medical record data using the residual life value estimator (ReLiVE)"
+Supplementary material for "Estimation of optimal treatment regimes with electronic medical record data using the residual life value estimator (ReLiVE)"
 
 This repository contains the R and Python code used to conduct the simulation study in "Optimizing treatment regimes with electronic medical record data using the residual life value estimator (ReLiVE)" by Rhodes, Davidian, and Lu.
 
